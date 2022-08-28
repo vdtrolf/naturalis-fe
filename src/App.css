@@ -1,38 +1,110 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
 .App {
+  margin: 0;
+  background-color: black;
+  font-family: Helvetica;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Navbar {
+  width: 608px;
+  height: 48px;
+  padding: 0px 0;
+  align-items: left;
+  background-color: black;
+  background-image: url("./csstiles/PF-back.png");
+  background-repeat: repeat-x;
+  display: grid;
+  grid-template-columns: 210px 238px 160px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.NavbarInfo {
+  width: 240px;
+  height: 48px;
+  align-items: left;
+  padding: 0px 0;
+  font-size: 12px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.ButtonStop {
+  width: 48px;
+  height: 48px;
+  padding: 0px 0;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  background-image: url("./csstiles/TTP-start.png");
 }
 
-.App-link {
-  color: #61dafb;
+.ButtonStart {
+  width: 48px;
+  height: 48px;
+  padding: 0px 0;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  background-image: url("./csstiles/TTP-plus.png");
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.ButtonClone {
+  width: 48px;
+  height: 48px;
+  padding: 0px 0;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  background-image: url("./csstiles/TTP-sessions.png");
+}
+
+.WorkArea {
+  position: relative;
+  max-width: 576px;
+  margin: 0px 0px;
+  padding: 16px 16px;
+  display: grid;
+  grid-template-columns: 576px;
+  grid-template-rows: 576px;
+  background-color: #3d5474;
+  background-image: url("./csstiles/taptapback.png");
+}
+
+.Footer {
+  margin: 16px 16px;
+  display: grid;
+  font-family: Helvetica;
+  font-size: 18px;
+  font-weight: bold;
+  color: #d0f5a9;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+}
+
+.PenguinsList {
+  margin: 12px 0px;
+  font-family: Helvetica;
+  font-size: 16px;
+  color: #d0f5a9;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 21px 21px 21px 21px 21px 21px 21px 21px 21px 21px 21px;
 }
