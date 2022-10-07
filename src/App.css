@@ -25,66 +25,154 @@ code {
   padding: 0px 0;
   align-items: left;
   background-color: black;
-  background-image: url("./csstiles/PF-back.png");
+  background-image: url("./images/PF-back.png");
   background-repeat: repeat-x;
   display: grid;
-  grid-template-columns: 210px 238px 160px;
+  grid-template-columns: 210px 248px 150px;
 }
 
 .NavbarInfo {
-  width: 240px;
+  width: 204x;
   height: 48px;
   align-items: left;
   padding: 0px 0;
   font-size: 12px;
 }
 
-.ButtonStop {
-  width: 48px;
-  height: 48px;
-  padding: 0px 0;
+.ButtonStart {
+  width: 24px;
+  height: 24px;
+  padding: 12px 6px ;
   border: none;
   cursor: pointer;
   overflow: hidden;
   background-color: Transparent;
   background-repeat: no-repeat;
-  background-image: url("./csstiles/TTP-start.png");
+  background-image: url("./images/TTP-start-24.png");
 }
 
-.ButtonStart {
-  width: 48px;
-  height: 48px;
-  padding: 0px 0;
+.ButtonStart:hover {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  background-image: url("./images/TTP-start-hover-24.png");
+}
+
+.ButtonPlus {
+  width: 24px;
+  height: 24px;
+  padding: 12px 6px ;
   border: none;
   cursor: pointer;
   overflow: hidden;
   background-color: Transparent;
   background-repeat: no-repeat;
-  background-image: url("./csstiles/TTP-plus.png");
+  background-image: url("./images/TTP-plus-24.png");
+}
+
+.ButtonPlus:hover {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  background-image: url("./images/TTP-plus-hover-24.png");
 }
 
 .ButtonClone {
-  width: 48px;
-  height: 48px;
-  padding: 0px 0;
+  width: 24px;
+  height: 24px;
+  padding: 12px 6px ;
   border: none;
   cursor: pointer;
   overflow: hidden;
   background-color: Transparent;
   background-repeat: no-repeat;
-  background-image: url("./csstiles/TTP-sessions.png");
+  background-image: url("./images/TTP-clone-24.png");
+}
+
+.ButtonClone:hover {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  background-image: url("./images/TTP-clone-hover-24.png");
+}
+
+
+.ButtonSteps {
+  width: 24px;
+  height: 24px;
+  padding: 12px 6px ;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  background-image: url("./images/TTP-step-24.png");
+}
+
+.ButtonSteps:hover {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  background-image: url("./images/TTP-step-hover-24.png");
+}
+
+.ButtonAdmin {
+  width: 24px;
+  height: 24px;
+  padding: 12px 6px ;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  background-image: url("./images/TTP-admin-24.png");
+}
+
+.ButtonAdmin:hover {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  background-image: url("./images/TTP-admin-hover-24.png");
+}
+
+.ButtonSteps:hover {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  background-image: url("./images/TTP-step-hover-24.png");
+}
+
+.ButtonClose {
+  width: 24px;
+  height: 24px;
+  padding: 16px 6px ;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  background-image: url("./images/TTP-close-24.png");
+}
+
+.ButtonClose:hover {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  background-image: url("./images/TTP-close-hover-24.png");
+}
+
+.ButtonArea {
+  margin: 0px 0px;
+  padding: 12px 0px;
+  width : 150 px;
+  display: grid;
+  grid-template-columns: 30px 30px 30px 30px 30px;
+  grid-template-rows: auto;
 }
 
 .WorkArea {
-  position: relative;
-  max-width: 576px;
   margin: 0px 0px;
   padding: 16px 16px;
+  width : 576 px;
   display: grid;
   grid-template-columns: 576px;
   grid-template-rows: 576px;
-  background-color: #3d5474;
-  background-image: url("./csstiles/taptapback.png");
+  background-image: url("./images/taptapback.png");
+  background-size : auto;
+  background-repeat: no-repeat;
 }
 
 .Footer {
@@ -107,4 +195,89 @@ code {
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: 21px 21px 21px 21px 21px 21px 21px 21px 21px 21px 21px;
+}
+
+
+/* The sidebar menu */
+
+.sidebar {
+  height: 608px; /* 100% Full-height */
+  width: 0px; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 50; /* Stay on top */
+  top: 48px;
+  left: 0;
+  font-size: 20px;
+  color: #b0cdf9;
+  background-color: #000; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+  background-image: url("./images/lbar-back.png");
+}
+
+
+
+/* The sidebar links */
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #dbe3fb;
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidebar li:hover {
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.sideNavbar {
+  width: 238px;
+  height: 48px;
+  padding: 10px 0px;
+  align-items: left;
+  display: grid;
+  grid-template-rows: 50px;
+  grid-template-columns: 200px 50px;
+}
+
+
+
+/* Position and style the close button (top right corner) */
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+
+/* The adminbar menu */
+
+.adminbar {
+  height: 400px; /* 100% Full-height */
+  width: 0px; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 60; /* Stay on top */
+  top: 48px;
+  left: 408px;
+  font-size: 20px;
+  color: #b0cdf9;
+  background-color: #000; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+  background-image: url("./images/rbar-back.png");
+}
+
+.adminNavbar {
+  width: 188px;
+  height: 48px;
+  padding: 10px 0px;
+  align-items: left;
+  display: grid;
+  grid-template-rows: 50px;
+  grid-template-columns: 150px 50px;
 }
