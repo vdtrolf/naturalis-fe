@@ -12,12 +12,26 @@ export default function App() {
   const [sidebar,setSidebar] = useState(false);
   const [adminbar,setAdminbar] = useState(false);
   const [running,setRunning] =useState(false);
+  const [islandId,setIslandId] = useState(0);
 
   const handleStartButton = () => {
+    setRunning(true)
+    if(islandId===0) {
+      const newIsland = getNewIsland();
+      setIslandId(newIsland);
+    }
+    console.log("BUTTON START PRESSED");
+  } 
+
+  const handleStopButton = () => {
+    setRunning(false)
     console.log("BUTTON START PRESSED");
   } 
 
   const handlePlusButton = () => {
+    setRunning(true);
+    const newIsland = getNewIsland();
+    setIslandId(newIsland);
     console.log("BUTTON PLUS PRESSED");
   } 
 
@@ -48,11 +62,17 @@ export default function App() {
     <div className="App">
       <Sidebar onCloseButton={handleCloseButton} sidebar={sidebar}/>
       <Adminbar onCloseButton={handleCloseButton} adminbar={adminbar}/>
-      <Navbar onStartButton={handleStartButton} onPlusButton={handlePlusButton} onCloneButton={handleCloneButton} onStepsButton={handleStepsButton} onAdminButton={handleAdminButton} />
+      <Navbar running={running} onStartButton={handleStartButton} onStopButton={handleStopButton} onPlusButton={handlePlusButton} onCloneButton={handleCloneButton} onStepsButton={handleStepsButton} onAdminButton={handleAdminButton} />
       <div className="WorkArea">
+        <div id="WaveArea" style={{opacity:running?'100':'0'}}/>
         <IslandArea />
         <Footer />
       </div>
     </div>
   );
 }
+
+const getNewIsland = () => {
+  return 1;
+}
+

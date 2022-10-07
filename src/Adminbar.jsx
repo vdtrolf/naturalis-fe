@@ -7,7 +7,7 @@ export default function Adminbar(props) {
   const classes = clsx({ "ui-button": className });
 
   return (
-    <div id="mySidebar" className="adminbar" style={{width:adminbar?'200px':'0px'}}>
+    <div id="mySidebar" className="adminbar" style={{width:adminbar?'200px':'0px',marginRight:adminbar?'200px':'0px'}}>
       <div className="adminNavbar">
         <div>Account</div>
         <div><Button className="ButtonClose" onClickHandler={onCloseButton} >&nbsp;</Button></div>
