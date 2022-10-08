@@ -60,9 +60,13 @@ export default function Tile(props) {
         setTile({num:tileNum,var:tileVar,x:tileX,y:tileY,img:tileImg});
    },[tileNum])              
 
+   const handleClick = () => {
+      onTileClick(tile.x,tile.y);
+   }
+
   const tileImg = tile.var==="A"?tile.num*2:tile.num*2 +1;
  
   if (tile.img) {
-    return <img src={tiles[tile.img]} style={{width: '48px', height:'48px', transition:'0.5s'}} onClick={() => onTileClick(tile.x,tile.y)} />
+    return <img src={tiles[tile.img]} style={{width: '48px', height:'48px', transition:'0.5s'}} onClick={handleClick} />
   } 
 }

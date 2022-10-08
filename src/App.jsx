@@ -22,18 +22,18 @@ export default function App() {
         setIsland(newIsland);
       }
       intervalId = setInterval( () => {
-        console.log("in interval " + intervalId + " for island " + island.id);
+        // console.log("in interval " + intervalId + " for island " + island.id);
         const updatedIsland = refreshIsland(island);
         setIsland(updatedIsland);
       },2000)
-      console.log("New interval " + intervalId);
+      // console.log("New interval " + intervalId);
     } else {
-      console.log("Clearing interval " + intervalId);
+      // console.log("Clearing interval " + intervalId);
       clearInterval(intervalId);
     }
 
     return () => {
-      console.log("Ending interval " + intervalId);
+      // console.log("Ending interval " + intervalId);
       clearInterval(intervalId);
     }
 
@@ -85,13 +85,17 @@ export default function App() {
     console.log("TILE CLICKED AT " + x + "/" + y);
   } 
 
+  const handlePenguinClick = (x,y) => {
+    console.log("PENGUIN CLICKED AT " + x + "/" + y);
+  } 
+
   return (
     <div className="App">
       <Sidebar onCloseButton={handleCloseButton} sidebar={sidebar}/>
       <Adminbar onCloseButton={handleCloseButton} adminbar={adminbar}/>
       <Navbar running={running} onStartButton={handleStartButton} onStopButton={handleStopButton} onPlusButton={handlePlusButton} onCloneButton={handleCloneButton} onStepsButton={handleStepsButton} onAdminButton={handleAdminButton} />
       <div className="WorkArea">
-        <IslandArea running={running} island={island} onTileClick={handleTileClick} />
+        <IslandArea running={running} island={island} onTileClick={handleTileClick} onPenguinClick={handlePenguinClick} />
         <Footer />
       </div>
     </div>
@@ -106,13 +110,21 @@ const refreshIsland = (island) => {
 
     switch (Math.floor(Math.random() * 4)) {
       case 0:
-        return {...island,weather:"rain",tiles:[{key:0, num:0,var:"B",x:1,y:1},{key:1, num:3,var:"B",x:1,y:2},{key:2, num:4,var:"A",x:1,y:3},{key:3, num:11,var:"A",x:1,y:4}]};
+        return {...island,weather:"rain",
+        tiles:[{key:0, num:0,var:"B",x:1,y:1},{key:1, num:3,var:"B",x:1,y:2},{key:2, num:4,var:"A",x:1,y:3},{key:3, num:11,var:"A",x:1,y:4},{key:4, num:9,var:"b",x:1,y:5}],
+        artifacts:[{key:0,name:"empty"},{key:1,name:"cross"},{key:2,name:"empty"},{key:3,name:"fish"}]};
       case 1:
-        return {...island,weather:"sun",tiles:[{key:0, num:0,var:"B",x:1,y:1},{key:5, num:3,var:"B",x:1,y:2},{key:2, num:8,var:"A",x:1,y:3},{key:3, num:12,var:"A",x:1,y:4}]};
+        return {...island,weather:"sun",
+        tiles:[{key:0, num:0,var:"B",x:1,y:1},{key:5, num:3,var:"B",x:1,y:2},{key:2, num:8,var:"A",x:1,y:3},{key:3, num:12,var:"A",x:1,y:4},{key:4, num:9,var:"b",x:1,y:5}],
+        artifacts:[{key:0,name:"empty"},{key:1,name:"cross"},{key:2,name:"empty"},{key:3,name:"fish"}]};
       case 2:
-        return {...island,weather:"snow",tiles:[{key:0, num:14,var:"B",x:1,y:1},{key:1, num:7,var:"B",x:1,y:2},{key:2, num:10,var:"A",x:1,y:3},{key:3, num:13,var:"A",x:1,y:4}]};
+        return {...island,weather:"snow",
+        tiles:[{key:0, num:14,var:"B",x:1,y:1},{key:1, num:7,var:"B",x:1,y:2},{key:2, num:10,var:"A",x:1,y:3},{key:3, num:13,var:"A",x:1,y:4},{key:4, num:9,var:"b",x:1,y:5}],
+        artifacts:[{key:0,name:"empty"},{key:1,name:"cross"},{key:2,name:"fish"},{key:3,name:"wreath"}]};
       case 3:
-        return {...island,weather:"cold",tiles:[{key:0, num:5,var:"B",x:1,y:1},{key:5, num:9,var:"B",x:1,y:2},{key:2, num:8,var:"A",x:1,y:3},{key:3, num:14,var:"A",x:1,y:4}]};
+        return {...island,weather:"cold",
+        tiles:[{key:0, num:5,var:"B",x:1,y:1},{key:5, num:9,var:"B",x:1,y:2},{key:2, num:8,var:"A",x:1,y:3},{key:3, num:14,var:"A",x:1,y:4},{key:4, num:9,var:"b",x:1,y:5}],
+        artifacts:[{key:0,name:"empty"},{key:1,name:"cross"},{key:2,name:"empty"},{key:3,name:"fish"}]};
     }
 }
 

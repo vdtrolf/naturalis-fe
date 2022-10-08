@@ -39,9 +39,9 @@ code {
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
 }
 
-.TileArea {
+.GridArea {
   position: absolute;
-  z-index: 20; /* Stay on top */
+  /* Stay on top */
   left: 16px;
   top: 64px;
   padding: 48px 48px;
