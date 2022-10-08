@@ -19,15 +19,73 @@ code {
   text-align: center;
 }
 
-#WaveArea {
+.WorkArea {
+  margin: 0px 0px;
+  padding: 16px 16px;
+  width : 576 px;
+  display: grid;
+  grid-template-columns: 576px;
+  grid-template-rows: 576px;
+  background-image: url("./images/taptapback.png");
+  background-size : auto;
+  background-repeat: no-repeat;
+}
+
+.WaveArea {
+  width : 576 px;
+  height : 576 px;
+  z-index: 10; /* Stay on top */
   padding: 0px 0;
-  align-items: left;
-  background-color: black;
-  background-image: url("./images/waves-back.png");
-  opacity: 0;
-  overflow-x: hidden; /* Disable horizontal scroll */
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
 }
+
+.TileArea {
+  position: absolute;
+  z-index: 20; /* Stay on top */
+  left: 16px;
+  top: 64px;
+  padding: 48px 48px;
+  display: grid;
+  grid-template-columns: 48px 48px 48px 48px 48px 48px 48px 48px 48px 48px;
+  grid-template-rows: 48px 48px 48px 48px 48px 48px 48px 48px 48px 48px;
+}
+
+.Tile {
+  left: 0px;
+  top: 0px;
+  width : 48 px;
+  height : 48 px;
+  z-index: 20; /* Stay on top */
+  padding: 0px 0;
+}
+
+.WeatherArea {
+  position: absolute;
+  left: 16px;
+  top: 64px;
+  width : 576 px;
+  height : 576 px;
+  z-index: 60; /* Stay on top */
+  padding: 0px 0;
+  opacity: 0;
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+  pointer-events: none;
+  background-image: url("./images/weather-sun.png");
+}
+
+.sun {
+  background-image: url("./images/weather-sun.png");
+}
+.cold {
+  background-image: url("./images/weather-cold.png");
+}
+.rain {
+  background-image: url("./images/weather-rain.png");
+}
+.snow {
+  background-image: url("./images/weather-snow.png");
+}
+
 
 .Navbar {
   width: 608px;
@@ -125,17 +183,7 @@ code {
   grid-template-rows: auto;
 }
 
-.WorkArea {
-  margin: 0px 0px;
-  padding: 16px 16px;
-  width : 576 px;
-  display: grid;
-  grid-template-columns: 576px;
-  grid-template-rows: 576px;
-  background-image: url("./images/taptapback.png");
-  background-size : auto;
-  background-repeat: no-repeat;
-}
+
 
 .Footer {
   margin: 16px 16px;
@@ -166,7 +214,7 @@ code {
   height: 608px; /* 100% Full-height */
   width: 0px; /* 0 width - change this with JavaScript */
   position: fixed; /* Stay in place */
-  z-index: 50; /* Stay on top */
+  z-index: 70; /* Stay on top */
   top: 48px;
   left: 0;
   font-size: 20px;
@@ -223,7 +271,7 @@ code {
   height: 400px; /* 100% Full-height */
   width: 0; /* 0 width - change this with JavaScript */
   position: fixed; /* Stay in place */
-  z-index: 60; /* Stay on top */
+  z-index: 80; /* Stay on top */
   top: 48px;
   left: 408px;
   font-size: 20px;
