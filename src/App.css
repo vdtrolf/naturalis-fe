@@ -50,6 +50,20 @@ code {
   grid-template-rows: 48px 48px 48px 48px 48px 48px 48px 48px 48px 48px;
 }
 
+.FreeArea {
+  position: absolute;
+  /* Stay on top */
+  left: 16px;
+  top: 64px;
+  padding: 48px 48px;
+  width: 480px;
+  height: 480px;
+}
+
+.Penguin {
+  position: absolute;
+}
+
 .Tile {
   left: 0px;
   top: 0px;

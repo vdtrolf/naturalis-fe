@@ -32,11 +32,14 @@ import tile_14_A from "./images/PF-1-14-a.png";
 import tile_14_B from "./images/PF-1-14-b.png";
 import tile_15_A from "./images/PF-1-15-a.png";
 import tile_15_B from "./images/PF-1-15-b.png";
+import earth from "./images/PF-2-0.png";
+import empty from "./images/empty.png";
+
 
 export default function Tile(props) {
 
   const [tile,setTile] = useState({});  
-  const {className,tileNum, tileVar, tileX, tileY, onTileClick, ...attribs } = props;
+  const {className,tileType,tileNum, tileVar, tileLine, tileCol, onTileClick, ...attribs } = props;
   
   const tiles = [tile_0_A,tile_0_B,
                  tile_1_A,tile_1_B,
@@ -56,17 +59,20 @@ export default function Tile(props) {
                  tile_15_A,tile_15_B];
 
    useEffect(() => {
-        const tileImg = tileVar==="A"?tileNum*2:tileNum*2 +1;
-        setTile({num:tileNum,var:tileVar,x:tileX,y:tileY,img:tileImg});
+        var tileImg = empty;
+        if (tileType === 1) {
+            tileImg = tiles[tileVar==="a"?tileNum*2:tileNum*2 +1];
+        } else if (tileType > 1) {
+            tileImg = earth;
+        }
+        setTile({num:tileNum,var:tileVar,line:tileLine,col:tileCol,img:tileImg});
    },[tileNum])              
 
    const handleClick = () => {
-      onTileClick(tile.x,tile.y);
+      onTileClick(tile.line,tile.col);
    }
-
-  const tileImg = tile.var==="A"?tile.num*2:tile.num*2 +1;
  
   if (tile.img) {
-    return <img src={tiles[tile.img]} style={{width: '48px', height:'48px', transition:'0.5s'}} onClick={handleClick} />
+    return <div><img src={tile.img} style={{width: '48px', height:'48px', transition:'0.5s'}} onClick={handleClick} /></div>
   } 
 }
