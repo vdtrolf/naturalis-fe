@@ -65,14 +65,15 @@ export default function Tile(props) {
         } else if (tileType > 1) {
             tileImg = earth;
         }
+        
         setTile({num:tileNum,var:tileVar,line:tileLine,col:tileCol,img:tileImg});
-   },[tileNum])              
+   },[tileType,tileNum])              
 
    const handleClick = () => {
       onTileClick(tile.line,tile.col);
    }
  
   if (tile.img) {
-    return <div><img src={tile.img} style={{width: '48px', height:'48px', transition:'0.5s'}} onClick={handleClick} /></div>
+    return <div><img src={tile.img} style={{width: '48px', height:'48px', transition:'0.5s'}} onClick={handleClick} alt={tile.line + "-" + tile.col} /></div>
   } 
 }

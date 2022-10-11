@@ -8,10 +8,10 @@ import waves from "./images/waves-back.png";
 
 export default function IslandArea(props) {
 
-  const {running, island, onTileClick, onPenguinClick, ...attribs} = props;
+  const {running, island, onTileClick, onPenguinClick, illuminatedId, ...attribs} = props;
   const weather = island.weather;
 
-  const debug = true;
+  const debug = false;
   
   if (debug) {
     console.log("=== Islandarea ==============================");
@@ -31,7 +31,10 @@ export default function IslandArea(props) {
             {island.artifacts && island.artifacts.map(artifact =><Artifact key={artifact.key} type={artifact.type} />)} 
           </div>
           <div className="FreeArea" style={{zIndex:'40'}}>
-            {island.penguins && island.penguins.map(penguin =><Penguin key={penguin.key} penguinObj={penguin} onPenguinClick={onPenguinClick}/>)} 
+            {island.penguins && island.penguins.map(penguin =><Penguin key={penguin.key} penguinObj={penguin} onPenguinClick={onPenguinClick} illuminatedId={illuminatedId}/>)} 
+          </div>
+          <div className="FreeArea" style={{zIndex:'50'}}>
+            <div id="islandName">{island.name} ({island.points} pts)</div>
           </div>
           <WeatherArea weather={weather} running={running}/>
         </div>

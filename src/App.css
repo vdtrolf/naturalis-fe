@@ -197,18 +197,61 @@ code {
   grid-template-rows: auto;
 }
 
-
-
-.Footer {
-  margin: 16px 16px;
-  display: grid;
+#islandName {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 50;
   font-family: Helvetica;
+  font-weight: bold;
   font-size: 18px;
+  color: #fefdaf;
+}
+
+#score {
+  position: absolute;
+  top: 30px;
+  left: 20px;
+  z-index: 50;
+  font-family: Helvetica;
+  font-size: 32px;
   font-weight: bold;
   color: #d0f5a9;
+}
+
+.Footer {
+  margin: 24px 8px;
   display: grid;
-  grid-template-columns: auto;
+  grid-template-columns: 54px 500px;
+  grid-template-rows: 24px 24px 24px 24px 24px 24px 24px 24px 24px;
+}
+
+.FooterText {
+  margin: 2px 0px;
+  font-family: Helvetica;
+  font-size: 16px;
+  font-weight: semi-bold;
+  text-align: left;
+  vertical-align: bottom;
+  color: #dfeed0;
+  display: grid;
+  grid-template-columns: 100px 180px 220px;
   grid-template-rows: auto;
+}
+
+.FooterText:hover {
+  font-weight: bold;
+  color: #ddba73;
+} 
+
+.TwoBars {
+  margin: 0px 0px;
+  display: grid;
+  color: #dfeed0;
+  display: grid;
+  vertical-align: bottom;
+  grid-template-columns: 50px;
+  grid-template-rows: 10px 10px;
 }
 
 .PenguinsList {
@@ -239,7 +282,35 @@ code {
   background-image: url("./images/lbar-back.png");
 }
 
+.IslandsList {
+  margin: 0px 8px;
+  font-family: Helvetica;
+  font-size: 16px;
+  color: #d0f5a9;
+  text-align: left;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 24px 24px 24px 24px 24px 24px 24px 24px 24px 24px 24px 24px;
+}
 
+.island {
+  color: #d0f5a9;
+  display: grid;
+  grid-template-columns: 140px 50px 50px;
+  grid-template-rows: auto;
+}
+
+.deadisland {
+  color: #f3f2f088;
+  display: grid;
+  grid-template-columns: 140px 50px 50px;
+  grid-template-rows: auto;
+}
+
+.island:hover {
+  font-weight: bold;
+  color: #ddba73;
+} 
 
 /* The sidebar links */
 .sidebar a {

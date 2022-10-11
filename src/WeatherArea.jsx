@@ -14,6 +14,6 @@ export default function WeatherArea(props) {
   const found = weathers.find(wea => wea.name === weather)
 
   if (found) {  
-    return <div className={classes} style={{opacity:running?'100':'0'}} ><img src={found.img} /></div>
+    return <div className={classes} style={{opacity:running?'100':'0'}} ><img src={found.img} width="576px" height="570px" /></div>
   }
 }

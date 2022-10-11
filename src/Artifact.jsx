@@ -11,7 +11,7 @@ export default function Artifact(props) {
   const [artifact,setArtifact] = useState({});  
   const {className,type, ...attribs } = props;
   
-  const artifacts = [empty, wreath, cross, fish, swim,ice]
+  const artifacts = [empty, wreath, cross, fish, fish,ice]
  
   useEffect(() => {
     setArtifact({type:type, img: artifacts[type]});
