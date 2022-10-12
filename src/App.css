@@ -87,6 +87,17 @@ code {
   background-image: url("./images/weather-sun.png");
 }
 
+.StateArea {
+  position: absolute;
+  left: 16px;
+  top: 64px;
+  width : 576 px;
+  height : 576 px;
+  z-index: 65; /* Stay on top */
+  padding: 0px 0;
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+}
+
 .sun {
   background-image: url("./images/weather-sun.png");
 }
@@ -104,7 +115,6 @@ code {
 .Navbar {
   width: 608px;
   height: 48px;
-  padding: 0px 0;
   align-items: left;
   background-color: black;
   background-image: url("./images/PF-back.png");
@@ -117,8 +127,17 @@ code {
   width: 204x;
   height: 48px;
   align-items: left;
-  padding: 0px 0;
+  padding: 1px 1px;
   font-size: 12px;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 15px 15px 15px;
+}
+
+.NavbarInfoLine {
+  display: grid;
+  grid-template-columns: 16px 16px 16px 16px 16px 16px 16px 16px 16px 16px 16px 16px 16px;
+  grid-template-rows: auto ;
 }
 
 .ui-button {
@@ -244,6 +263,20 @@ code {
   color: #ddba73;
 } 
 
+.FooterTextIlluminated {
+  margin: 2px 0px;
+  font-family: Helvetica;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: left;
+  vertical-align: bottom;
+  color: #ddba73;
+  display: grid;
+  grid-template-columns: 100px 180px 220px;
+  grid-template-rows: auto;
+}
+
+
 .TwoBars {
   margin: 0px 0px;
   display: grid;
@@ -296,14 +329,14 @@ code {
 .island {
   color: #d0f5a9;
   display: grid;
-  grid-template-columns: 140px 50px 50px;
+  grid-template-columns: 20px 136px 42px 42px;
   grid-template-rows: auto;
 }
 
 .deadisland {
   color: #f3f2f088;
   display: grid;
-  grid-template-columns: 140px 50px 50px;
+  grid-template-columns: 20px 136px 42px 42px;
   grid-template-rows: auto;
 }
 

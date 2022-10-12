@@ -1,25 +1,25 @@
-import React, {useState,useEffect} from "react";
-import clsx from "clsx";
+import React from "react";
 import Button from "./Button.jsx";
+import garb from "./images/garb.png"
 
 export default function Sidebar(props) {
 
-  const {className, sidebar, onCloseButton, onIslandSelect, baseURL, islandId, islandsList, ...attribs } = props;
-  const classes = clsx({ "ui-button": className });
-  
-
-  
+  const {admin, sidebar, onCloseButton, onIslandSelect, onIslandDelete, islandsList } = props;
+    
   const handleIslandClick = (id) => {
     onIslandSelect(id);
   }
 
+  const handleGarbClick = (id) => {
+    onIslandDelete(id);
+  }
 
   if (islandsList) {
     const listIslands = islandsList.map((island) => {
       if (island.running) {
-        return <div className="island"><div onClick={() => handleIslandClick(island.id)}>{island.name}</div><div>{island.points}</div><div>runs</div></div>
+        return <div className="island">{admin?<img src={garb} onClick={() => handleGarbClick(island.id)} alt=""/>:<div />}<div onClick={() => handleIslandClick(island.id)}>{island.name}</div><div>{island.points}</div><div>runs</div></div>
       } else {
-        return <div className="deadisland"><div>{island.name}</div><div>{island.points}</div><div>gone</div></div>
+        return <div className="deadisland">{admin?<img src={garb} onClick={() => handleGarbClick(island.id)} alt=""/>:<div />}<div>{island.name}</div><div>{island.points}</div><div>gone</div></div>
         }
     });
 

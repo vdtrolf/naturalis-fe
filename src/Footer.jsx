@@ -15,7 +15,7 @@ import hunger_5 from "./images/hunger-5.png";
 
 export default function Footer(props) {
 
-  const {penguins,onPenguinEnter,onPenguinLeave,...attribs} = props;
+  const {penguins,onPenguinEnter,onPenguinLeave,illuminatedId} = props;
 
   const hunger = [hunger_0,hunger_1,hunger_2,hunger_3,hunger_4,hunger_5]
   const health = [health_0,health_1,health_2,health_3,health_4,health_5]
@@ -23,10 +23,8 @@ export default function Footer(props) {
   const activities = ["","Eating","Fishing","Making... well, you know..."]
 
   const handleMouseEnter = (id) => {
-    console.log("====== ooo =====> " + id)
     onPenguinEnter(id)
   }
-
 
   if (penguins) {
     const listPenguins = penguins.map((penguin) => {
@@ -34,8 +32,8 @@ export default function Footer(props) {
         const hungerImg = hunger[Math.floor(penguin.hungry/20)]
         const healthImg = health[Math.floor(penguin.wealth/20)]
         return <>
-          <div className="TwoBars"><img src={hungerImg} width="50px" height="10px" /><img src={healthImg} width="50px" height="10px" /></div>
-          <div className="FooterText" >
+          <div className="TwoBars"><img src={hungerImg} width="50px" height="10px" alt="" /><img src={healthImg} width="50px" height="10px" alt=""/></div>
+          <div className={penguin.key===illuminatedId?"FooterTextIlluminated":"FooterText"} >
             <div onMouseEnter={() => handleMouseEnter(penguin.key)} onMouseLeave={onPenguinLeave}>{penguin.name}</div>
             <div>({penguin.genderName} / {Math.floor(penguin.age)}y / {shapes[penguin.shape]})</div>
             <div>{penguin.activity > 0? activities[penguin.activity]:penguin.strategyShort}</div>
