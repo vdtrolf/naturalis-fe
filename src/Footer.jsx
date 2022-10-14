@@ -32,8 +32,8 @@ export default function Footer(props) {
         const hungerImg = hunger[Math.floor(penguin.hungry/20)]
         const healthImg = health[Math.floor(penguin.wealth/20)]
         return <>
-          <div className="TwoBars"><img src={hungerImg} width="50px" height="10px" alt="" /><img src={healthImg} width="50px" height="10px" alt=""/></div>
-          <div className={penguin.key===illuminatedId?"FooterTextIlluminated":"FooterText"} >
+          <div key={penguin.key} className="TwoBars"><img src={hungerImg} width="50px" height="10px" alt="" /><img src={healthImg} width="50px" height="10px" alt=""/></div>
+          <div key={penguin.key + 1000000} className={penguin.key===illuminatedId?"FooterTextIlluminated":"FooterText"} >
             <div onMouseEnter={() => handleMouseEnter(penguin.key)} onMouseLeave={onPenguinLeave}>{penguin.name}</div>
             <div>({penguin.genderName} / {Math.floor(penguin.age)}y / {shapes[penguin.shape]})</div>
             <div>{penguin.activity > 0? activities[penguin.activity]:penguin.strategyShort}</div>

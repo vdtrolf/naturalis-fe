@@ -17,9 +17,9 @@ export default function Sidebar(props) {
   if (islandsList) {
     const listIslands = islandsList.map((island) => {
       if (island.running) {
-        return <div className="island">{admin?<img src={garb} onClick={() => handleGarbClick(island.id)} alt=""/>:<div />}<div onClick={() => handleIslandClick(island.id)}>{island.name}</div><div>{island.points}</div><div>runs</div></div>
+        return <div key={island.id} className="island">{admin?<img src={garb} onClick={() => handleGarbClick(island.id)} alt=""/>:<div />}<div onClick={() => handleIslandClick(island.id)}>{island.name}</div><div>{island.points}</div><div>runs</div></div>
       } else {
-        return <div className="deadisland">{admin?<img src={garb} onClick={() => handleGarbClick(island.id)} alt=""/>:<div />}<div>{island.name}</div><div>{island.points}</div><div>gone</div></div>
+        return <div key={island.id} className="deadisland">{admin?<img src={garb} onClick={() => handleGarbClick(island.id)} alt=""/>:<div />}<div>{island.name}</div><div>{island.points}</div><div>gone</div></div>
         }
     });
 

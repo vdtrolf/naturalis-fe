@@ -8,9 +8,9 @@ import Footer from "./Footer.jsx";
 import convert from "./Fetchserver.js"
 import {useState,useEffect} from "react";
 
-const urls = [{name:"aws",url:"https://lub3kygki2.execute-api.us-east-1.amazonaws.com/Prod/"},
-              {name:"digital ocean", url:"https://lub3kygki2.execute-api.us-east-1.amazonaws.com/Prod/"},
-              {name:"local", url:"http://localhost:3001/"}]
+// const urls = [{name:"aws",url:"https://lub3kygki2.execute-api.us-east-1.amazonaws.com/Prod/"},
+//               {name:"digital ocean", url:"https://lub3kygki2.execute-api.us-east-1.amazonaws.com/Prod/"},
+//               {name:"local", url:"http://localhost:3001/"}]
 
 const NOT_STARTED = 0;
 const RUNNING = 1;
@@ -19,10 +19,14 @@ const ENDED = 3;
 
 export default function App() {
 
+  const [urls,setUrls] = useState([{name:"aws",url:"https://lub3kygki2.execute-api.us-east-1.amazonaws.com/Prod/"},
+  {name:"digital ocean", url:"https://lub3kygki2.execute-api.us-east-1.amazonaws.com/Prod/"},
+  {name:"local", url:"http://localhost:3001/"}])
+
   const [sidebar,setSidebar] = useState(false);
   const [adminbar,setAdminbar] = useState(false);
   const [runningState, setRunningState] = useState(NOT_STARTED);
-  const [admin,setAdmin] = useState(true);
+  const [admin,setAdmin] = useState(false);
   const [island,setIsland] = useState({});
   const [baseURL,setBaseURL] = useState("http://localhost:3001/");
   const [illuminatedId,setIlluminatedId] = useState(0);
@@ -111,11 +115,11 @@ export default function App() {
   } 
 
   const handleTileClick = (x,y) => {
-    console.log("TILE CLICKED AT " + x + "/" + y);
+    // console.log("TILE CLICKED AT " + x + "/" + y);
 
     const apenguin = island.penguins.find(penguin => penguin.hpos === x && penguin.lpos === y);
     if (apenguin && apenguin.alive) {
-      console.log("FOUND PENGUIN " + apenguin.name + " " + apenguin.key + " AT " + x + "/" + y);
+      // console.log("FOUND PENGUIN " + apenguin.name + " " + apenguin.key + " AT " + x + "/" + y);
       setIlluminatedId(apenguin.key);
     } else {
       setTile(baseURL,island.id,x,y)
@@ -151,11 +155,29 @@ export default function App() {
     .then((updatedIslandsList) => setIslandsList(updatedIslandsList));
   }
 
+  const handleURLSelect = (url) => {
+
+    console.log("URL SELECTED " + url)
+
+    setSidebar(false);
+    setAdminbar(false);
+    // setRunningState(NOT_STARTED);
+    // setIsland({});
+    // setBaseURL(URL)
+  }
+
+  const handlUserInput = (user,pwd) => {
+    setAdmin(user === "admin" && pwd==="admin")
+    setSidebar(false);
+    setAdminbar(false);
+  }
+
+
   return (
     <div className="App">
       <Sidebar admin={admin} onCloseButton={handleCloseButton} onIslandSelect={handleIslandSelect} onIslandDelete={handleIslandDelete} islandId={island.id} islandsList={islandsList} sidebar={sidebar}/>
-      <Adminbar admin={admin} onCloseButton={handleCloseButton} adminbar={adminbar}/>
-      <Navbar runningState={runningState} island={island} onStartButton={handleStartButton} onStopButton={handleStopButton} onPlusButton={handlePlusButton} onCloneButton={handleCloneButton} onStepsButton={handleStepsButton} onAdminButton={handleAdminButton} />
+      <Adminbar admin={admin} onCloseButton={handleCloseButton} adminbar={adminbar} urls={urls} baseURL={baseURL} onURLSelect={handleURLSelect} onUserInput={handlUserInput}/>
+      <Navbar runningState={runningState} island={island} admin={admin} onStartButton={handleStartButton} onStopButton={handleStopButton} onPlusButton={handlePlusButton} onCloneButton={handleCloneButton} onStepsButton={handleStepsButton} onAdminButton={handleAdminButton} />
       <div className="WorkArea">
         <IslandArea runningState={runningState} island={island} onTileClick={handleTileClick} onPenguinClick={handlePenguinClick} illuminatedId={illuminatedId}/>
         <Footer penguins={island.penguins} onPenguinEnter={handlePenguinEnter} onPenguinLeave={handlePenguinLeave} illuminatedId={illuminatedId}/>
