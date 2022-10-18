@@ -19,16 +19,18 @@ const ENDED = 3;
 
 export default function App() {
 
-  const [urls,setUrls] = useState([{name:"aws",url:"https://lub3kygki2.execute-api.us-east-1.amazonaws.com/Prod/"},
+  const urls= [{name:"aws",url:"https://lub3kygki2.execute-api.us-east-1.amazonaws.com/Prod/"},
   {name:"digital ocean", url:"https://lub3kygki2.execute-api.us-east-1.amazonaws.com/Prod/"},
-  {name:"local", url:"http://localhost:3001/"}])
+  {name:"local", url:"http://localhost:3001/"}];
 
   const [sidebar,setSidebar] = useState(false);
   const [adminbar,setAdminbar] = useState(false);
   const [runningState, setRunningState] = useState(NOT_STARTED);
   const [admin,setAdmin] = useState(false);
+  const [pulser,setPulser] = useState(false);
+  const [showBalloons,setShowBalloons] = useState(false);
   const [island,setIsland] = useState({});
-  const [baseURL,setBaseURL] = useState("http://localhost:3001/");
+  const [baseURL,setBaseURL] = useState("https://lub3kygki2.execute-api.us-east-1.amazonaws.com/Prod/");
   const [illuminatedId,setIlluminatedId] = useState(0);
   const [islandsList,setIslandsList] = useState([]);
 
@@ -40,7 +42,6 @@ export default function App() {
         .then((newIsland ) => setIsland(newIsland));
       }
       intervalId = setInterval( () => {
-        // console.log("in interval " + intervalId + " for island " + island.id);
         refreshIsland(baseURL, island.id)
         .then((updatedIsland) => setIsland(updatedIsland));
 
@@ -50,18 +51,37 @@ export default function App() {
         // }
 
       },2000)
-      // console.log("New interval " + intervalId);
+      
     } else {
-      // console.log("Clearing interval " + intervalId);
       clearInterval(intervalId);
     }
 
     return () => {
-      // console.log("Ending interval " + intervalId);
       clearInterval(intervalId);
     }
 
   },[runningState,island,baseURL]);
+
+  useEffect(() => {
+    refreshIslandsList(baseURL)
+    .then((updatedIslandsList) => setIslandsList(updatedIslandsList));
+  },[baseURL]);
+
+  useEffect(() => {
+    var pulserIntervalId = 0;
+    if (pulser) {
+      pulserIntervalId = setInterval( () => {
+        console.log("in pulser interval " + pulserIntervalId );
+        sendState(baseURL);
+      },2000)
+      
+    } else {
+      clearInterval(pulserIntervalId );
+    }
+    return () => {
+      clearInterval(pulserIntervalId);
+    }
+  },[pulser,baseURL]);
 
   useEffect(() => {
     const currentState = runningState;
@@ -77,27 +97,28 @@ export default function App() {
       setIsland({})
     }
     setRunningState(RUNNING)
-    console.log("BUTTON START PRESSED");
+    // console.log("BUTTON START PRESSED");
   } 
 
   const handleStopButton = () => {
     setRunningState(PAUSED)
-    console.log("BUTTON START PRESSED");
+    // console.log("BUTTON START PRESSED");
   } 
 
   const handlePlusButton = () => {
     setRunningState(RUNNING);
     setIsland({});
-    console.log("BUTTON PLUS PRESSED");
+    // console.log("BUTTON PLUS PRESSED");
   } 
 
   const handleCloneButton = () => {
     setSidebar( !sidebar);
-    console.log("BUTTON CLONE PRESSED");
+    // console.log("BUTTON CLONE PRESSED");
   } 
 
   const handleStepsButton = () => {
-    console.log("BUTTON STEPS PRESSED");
+    setPulser(!pulser);
+    // console.log("BUTTON STEPS PRESSED");
   } 
 
   const handleAdminButton = () => {
@@ -105,13 +126,20 @@ export default function App() {
       setSidebar(false);
     } 
     setAdminbar(!adminbar);
-    console.log("BUTTON ADMIN PRESSED");
+    // console.log("BUTTON ADMIN PRESSED");
   } 
 
   const handleCloseButton = () => {
     setSidebar(false);
     setAdminbar(false);
-    console.log("BUTTON CLOSE PRESSED");
+    // console.log("BUTTON CLOSE PRESSED");
+  } 
+
+  const handleLogoutButton = () => {
+    setSidebar(false);
+    setAdminbar(false);
+    setAdmin(false);
+    console.log("LOGOUT CLOSE PRESSED");
   } 
 
   const handleTileClick = (x,y) => {
@@ -150,20 +178,27 @@ export default function App() {
     .then((updatedIsland) => setIsland(updatedIsland));
   }
 
-  const handleIslandDelete = (id) => {
-    refreshIslandsList(baseURL,[id])
-    .then((updatedIslandsList) => setIslandsList(updatedIslandsList));
+  const handleIslandDelete = (idList) => {
+    idList.forEach(islandId => {
+      console.log("doing delete " + islandId)
+      refreshIslandsList(baseURL,islandId)
+      .then((updatedIslandsList) => setIslandsList(updatedIslandsList));
+
+      if (islandId === island.id) {
+        setRunningState(NOT_STARTED);
+        setIsland({});
+      }
+
+    })
   }
 
   const handleURLSelect = (url) => {
 
     console.log("URL SELECTED " + url)
-
+    setBaseURL(url);
+    setIsland({});
     setSidebar(false);
     setAdminbar(false);
-    // setRunningState(NOT_STARTED);
-    // setIsland({});
-    // setBaseURL(URL)
   }
 
   const handlUserInput = (user,pwd) => {
@@ -172,14 +207,19 @@ export default function App() {
     setAdminbar(false);
   }
 
+  const handleSetBalloons = (checkBalloons) => {
+    console.log("BALLOOMS " + checkBalloons);
+    setShowBalloons(checkBalloons);
+  }
+
 
   return (
     <div className="App">
-      <Sidebar admin={admin} onCloseButton={handleCloseButton} onIslandSelect={handleIslandSelect} onIslandDelete={handleIslandDelete} islandId={island.id} islandsList={islandsList} sidebar={sidebar}/>
-      <Adminbar admin={admin} onCloseButton={handleCloseButton} adminbar={adminbar} urls={urls} baseURL={baseURL} onURLSelect={handleURLSelect} onUserInput={handlUserInput}/>
-      <Navbar runningState={runningState} island={island} admin={admin} onStartButton={handleStartButton} onStopButton={handleStopButton} onPlusButton={handlePlusButton} onCloneButton={handleCloneButton} onStepsButton={handleStepsButton} onAdminButton={handleAdminButton} />
+      <Sidebar admin={admin} baseURL={baseURL} onCloseButton={handleCloseButton} onIslandSelect={handleIslandSelect} onIslandDelete={handleIslandDelete} islandId={island.id} islandsList={islandsList} sidebar={sidebar}/>
+      <Adminbar showBalloons={showBalloons} admin={admin} baseURL={baseURL} onCloseButton={handleCloseButton} onLogoutButton={handleLogoutButton} onSetBalloons={handleSetBalloons} adminbar={adminbar} urls={urls} onURLSelect={handleURLSelect} onUserInput={handlUserInput}/>
+      <Navbar runningState={runningState} island={island} admin={admin} pulser={pulser} onStartButton={handleStartButton} onStopButton={handleStopButton} onPlusButton={handlePlusButton} onCloneButton={handleCloneButton} onStepsButton={handleStepsButton} onAdminButton={handleAdminButton} />
       <div className="WorkArea">
-        <IslandArea runningState={runningState} island={island} onTileClick={handleTileClick} onPenguinClick={handlePenguinClick} illuminatedId={illuminatedId}/>
+        <IslandArea showBalloons={showBalloons} runningState={runningState} island={island} onTileClick={handleTileClick} onPenguinClick={handlePenguinClick} illuminatedId={illuminatedId}/>
         <Footer penguins={island.penguins} onPenguinEnter={handlePenguinEnter} onPenguinLeave={handlePenguinLeave} illuminatedId={illuminatedId}/>
       </div>
     </div>
@@ -201,9 +241,20 @@ const refreshIsland = async (baseURL,islandId) => {
   return extractIslandData(islandData);
 }
 
-const refreshIslandsList = async (baseURL,islandsToDelete=[])  => {
-  const islandsListData = await convert(baseURL + "islands" );
-  return islandsListData.islands;
+
+const refreshIslandsList = async (baseURL,islandToDelete=0)  => {
+  if (islandToDelete > 0) {
+    const islandsListData = await convert(baseURL + "deleteIsland?islandId=" + islandToDelete );
+    return islandsListData.islands;
+  } else {
+    const islandsListData = await convert(baseURL + "islands" );
+    return islandsListData.islands;
+  }
+}
+
+const sendState = async (baseURL) => {
+  const data = await convert(baseURL + "state" );
+  return data;
 }
 
 

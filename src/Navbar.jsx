@@ -11,7 +11,7 @@ export default function Navbar(props) {
   // const PAUSED = 2;
   // const ENDED = 3;
 
-  const { runningState, island, admin, onStartButton, onStopButton, onPlusButton, onCloneButton, onStepsButton, onAdminButton } = props;
+  const { runningState, island, admin, pulser, onStartButton, onStopButton, onPlusButton, onCloneButton, onStepsButton, onAdminButton } = props;
 
   var tilesLine =[];
   var fishesLine =[];
@@ -33,8 +33,8 @@ export default function Navbar(props) {
         <Button className={runningState===RUNNING?"ButtonStop":"ButtonStart"} onClickHandler={runningState===RUNNING?onStopButton:onStartButton}>&nbsp;</Button>
         <Button className="ButtonPlus" onClickHandler={onPlusButton}>&nbsp;</Button>
         <Button className="ButtonClone" onClickHandler={onCloneButton}>&nbsp;</Button>
-        {admin&&<Button className="ButtonSteps" onClickHandler={onStepsButton}>&nbsp;</Button>}
-        <Button className="ButtonAdmin" onClickHandler={onAdminButton}>&nbsp;</Button>
+        {admin&&<Button className={pulser?"ButtonStepsRunnning":"ButtonSteps"} onClickHandler={onStepsButton}>&nbsp;</Button>}
+        <Button className={admin?"ButtonAdminOn":"ButtonAdmin"} onClickHandler={onAdminButton}>&nbsp;</Button>
       </div>
     </div>
   );

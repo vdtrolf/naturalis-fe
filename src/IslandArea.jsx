@@ -9,7 +9,7 @@ import waves from "./images/waves-back.png";
 
 export default function IslandArea(props) {
 
-  const {runningState, island, onTileClick, onPenguinClick, illuminatedId} = props;
+  const {runningState, island, onTileClick, onPenguinClick, illuminatedId, showBalloons} = props;
   const weather = island.weather;
 
   const NOT_STARTED = 0;
@@ -37,10 +37,11 @@ export default function IslandArea(props) {
             {island.artifacts && island.artifacts.map(artifact =><Artifact key={artifact.key} type={artifact.type} />)} 
           </div>
           <div className="FreeArea" style={{zIndex:'40', pointerEvents:'none'}} >
-            {island.penguins && island.penguins.map(penguin =><Penguin key={penguin.key} penguinObj={penguin} onPenguinClick={onPenguinClick} illuminatedId={illuminatedId}/>)} 
+            {island.penguins && island.penguins.map(penguin =><Penguin key={penguin.key} showBalloons={showBalloons} penguinObj={penguin} onPenguinClick={onPenguinClick} illuminatedId={illuminatedId}/>)} 
           </div>
-          <div className="FreeArea" style={{zIndex:'50', pointerEvents:'none'}}>
-            <div id="islandName">{island.name} ({island.points} pts)</div>
+          <div className="NameArea" style={{zIndex:'50', pointerEvents:'none'}}>
+            <div id="islandName">{island.name}</div>
+            <div id="score">{island.points}</div>
           </div>
           <WeatherArea weather={weather} runningState={runningState}/>
           {(runningState===PAUSED || runningState===ENDED) && <StateArea runningState={runningState} />}

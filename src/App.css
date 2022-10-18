@@ -60,6 +60,20 @@ code {
   height: 480px;
 }
 
+
+.NameArea {
+  position: absolute;
+  /* Stay on top */
+  left: 16px;
+  top: 64px;
+  padding: 48px 48px;
+  width: 480px;
+  height: 480px;
+  display: grid;
+  grid-template-columns: 480px;
+  grid-template-rows: 20px 50px;
+}
+
 .Penguin {
   position: absolute;
 }
@@ -134,7 +148,128 @@ code {
   grid-template-rows: 24x 24px;
 }
 
+.login {
+  align-items: left;
+  text-align:left;
+  padding: 5px 18px;
+  font-size: 14px;
+  display: grid;
+  grid-template-columns: 180px;
+  grid-template-rows: auto;
+}
+
+input {
+  color: #dfeed0;
+  background-color: rgb(41, 78, 107); 
+  margin: 5px 0;
+  border:0; 
+  border-bottom:1px solid rgb(125, 125, 125); 
+  width:80%;
+}
+
+input[type="checkbox"] {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  color: rgb(41, 78, 107); 
+  border: 1px solid rgb(125, 125, 125); ;
+  border-radius: 4px;
+  appearance: none;
+  outline: 0;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  color: rgb(198, 228, 250); 
+  border: 4px solid rgb(210, 210, 210); ;
+  border-radius: 4px;
+  appearance: none;
+  outline: 0;
+  cursor: pointer;
+}
+
+select {
+  color: #dfeed0;
+  background-color: rgb(41, 78, 107); 
+  margin: 5px 0;
+  border:1px solid rgb(125, 125, 125); 
+  width:80%;
+}
+
+input.hover {
+  color: #dfeed0;
+}
+
+label {
+  font-weight: bold;
+  padding: 5px 0;
+}
+
+.inputButtonsBar {
+  align-items: right;
+  display: grid;
+  grid-template-columns: 18px 64px 64px;
+  grid-template-rows: auto;
+}
+
+.sidebarButtonsBar {
+  align-items: right;
+  display: grid;
+  grid-template-columns: 18px 200px;
+  grid-template-rows: auto;
+}
+
+
+.inputButton {
+  margin: 0 2px;
+  color: #dfeed0;
+  background-color: rgb(51, 100, 137); 
+  border:1px solid rgb(125, 125, 125); 
+}
+
+.inputButton.hover {
+  font-weight: bold;
+  color: #e7ebe4;
+  background-color: rgb(64, 125, 171); 
+}
+
+.checkmark {
+  top: 0;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  background-color: #eee;
+}
+
+
+.checkboxList {
+  margin: 0px 0px;
+  font-family: Helvetica;
+  font-size: 14px;
+  text-align: left;
+  font-weight: normal;
+  color: rgb(173, 198, 215); 
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 24px 24px;
+}
+
+.checkboxBar {
+  display: grid;
+  grid-template-columns: 20px 136px;
+  grid-template-rows: auto;
+}
+
+.checkBoxText {
+  padding: 4px 0;
+  color: rgb(175, 199, 216); 
+}
+
 .NavbarInfoLine {
+  
   display: grid;
   grid-template-columns: 26px 26px 26px 26px 26px 26px 26px 26px 26px 26px 26px 26px 26px;
   grid-template-rows: auto ;
@@ -187,6 +322,10 @@ code {
   background-image: url("./images/TTP-step-24.png");
 }
 
+.ButtonStepsRunnning {
+  background-image: url("./images/TTP-steprunning-24.png");
+}
+
 .ButtonSteps:hover {
   background-image: url("./images/TTP-step-hover-24.png");
 }
@@ -199,12 +338,39 @@ code {
   background-image: url("./images/TTP-admin-hover-24.png");
 }
 
+.ButtonAdminOn {
+  background-image: url("./images/TTP-admin-on-24.png");
+}
+
+.ButtonAdminOn:hover {
+  background-image: url("./images/TTP-admin-hover-24.png");
+}
+
 .ButtonClose {
   background-image: url("./images/TTP-close-24.png");
 }
 
 .ButtonClose:hover {
   background-image: url("./images/TTP-close-hover-24.png");
+}
+
+.ui-button36 {
+  width: 36px;
+  height: 36px;
+  padding: 12px 6px ;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  background-color: Transparent;
+  background-repeat: no-repeat;
+}
+
+.ButtonSubmit {
+  background-image: url("./images/TTP-submit-36.png");
+}
+
+.ButtonSubmit:hover {
+  background-image: url("./images/TTP-submithover-36.png");
 }
 
 .ButtonArea {
@@ -230,7 +396,7 @@ code {
 #score {
   position: absolute;
   top: 30px;
-  left: 20px;
+  left: 8px;
   z-index: 50;
   font-family: Helvetica;
   font-size: 32px;
@@ -301,7 +467,7 @@ code {
 /* The sidebar menu */
 
 .sidebar {
-  height: 608px; /* 100% Full-height */
+  height: 600px; /* 100% Full-height */
   width: 0px; /* 0 width - change this with JavaScript */
   position: fixed; /* Stay in place */
   z-index: 70; /* Stay on top */
@@ -309,10 +475,14 @@ code {
   left: 0;
   font-size: 20px;
   color: #b0cdf9;
-  background-color: #000; /* Black*/
+  background-color: rgb(41, 78, 107); 
+  border: 0px solid rgb(103, 133, 168);
   overflow-x: hidden; /* Disable horizontal scroll */
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
-  background-image: url("./images/lbar-back.png");
+  /* background-image: url("./images/lbar-back.png"); */
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 52px 510px 28px;
 }
 
 .IslandsList {
@@ -345,6 +515,16 @@ code {
   color: #ddba73;
 } 
 
+.garb{
+  width: 16px;
+  height: 16px;
+  background: url("./images/garb.png") no-repeat;
+  display: inline-block;
+}
+.garb:hover {
+  background: url("./images/garbhover.png") no-repeat;
+}
+
 /* The sidebar links */
 .sidebar a {
   padding: 8px 8px 8px 32px;
@@ -366,9 +546,10 @@ code {
   height: 48px;
   padding: 10px 0px;
   align-items: left;
+  text-align: left;
   display: grid;
   grid-template-rows: 50px;
-  grid-template-columns: 200px 50px;
+  grid-template-columns: 16px 200px 34px;
 }
 
 
@@ -386,25 +567,27 @@ code {
 /* The adminbar menu */
 
 .adminbar {
-  height: 400px; /* 100% Full-height */
-  width: 0; /* 0 width - change this with JavaScript */
+  height: 200px; /* 100% Full-height */
+  width: 0px; /* 0 width - change this with JavaScript */
   position: fixed; /* Stay in place */
   z-index: 80; /* Stay on top */
   top: 48px;
-  left: 408px;
+  left: 400px;
   font-size: 20px;
   color: #b0cdf9;
-  background-color: #000; /* Black*/
+  background-color: rgb(41, 78, 107); 
+  border: 0px solid rgb(103, 133, 168);
   overflow-x: hidden; /* Disable horizontal scroll */
-  background-image: url("./images/rbar-back.png");
+  /* background-image: url("./images/rbar-back.png"); */
 }
 
 .adminNavbar {
   width: 188px;
-  height: 48px;
+  height: 24px;
   padding: 10px 0px;
   align-items: left;
+  text-align: left;
   display: grid;
-  grid-template-rows: 50px;
-  grid-template-columns: 150px 50px;
+  grid-template-rows: 24px;
+  grid-template-columns: 16px 150px 34px;
 }

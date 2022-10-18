@@ -11,15 +11,22 @@ export default function LoginForm(props) {
     console.log(event.target.value);
     onUserInput(userId,pwd);
   }
-
+  
   return (
     <>
-      <div>LoginForm</div>
-      <form onSubmit={handleFormSubmit} >
-        <input type="text" id="userId" value={userId} onChange={e => setUserId(e.target.value)} placeholder="User id" className="textfield" />
-        <input type="text" id="pwd" value={pwd} onChange={e => setPwd(e.target.value)} placeholder="Password" className="textfield" />
-        <input type="submit" className="ButtonClose" value="Submit" />
-      </form>
+      <form className="login" onSubmit={handleFormSubmit} >
+       
+          <label type="text">Id</label>
+          <input className="loginInput" type="text" id="userId" value={userId} onChange={e => setUserId(e.target.value)} placeholder="User id" />
+          <label type="text">Pwd</label>
+          <input className="loginInput" type="password" id="pwd" value={pwd} onChange={e => setPwd(e.target.value)} placeholder="Password"  />
+          <div>&nbsp;</div>
+          <div className="inputButtonsBar">
+            <div />
+            <button className="inputButton" type="cancel" value="Cancelt">cancel</button>
+            <button className="inputButton" type="submit" value="Submit">submit</button>
+          </div>
+        </form>
     </>
   );
 }

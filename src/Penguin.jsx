@@ -4,9 +4,12 @@ import peng_f from "./images/peng-f-0.png";
 import peng_y from "./images/peng-y-0.png";
 import peng_f_eating from "./images/peng-f-eating.gif";
 import peng_m_eating from "./images/peng-m-eating.gif";
-import peng_y_fishing from "./images/peng-y-fishing.png";
 import peng_y_eating from "./images/peng-y-eating.gif";
 import peng_loving from "./images/peng-loving.gif";
+
+import balloon_fish from "./images/balloon-fish.png";
+import balloon_stable from "./images/balloon-stable.png";
+import balloon_warmth from "./images/balloon-warmth.png";
 
 import peng_f_1_fishing from "./images/peng-f-1-fishing.png";
 import peng_f_2_fishing from "./images/peng-f-2-fishing.png";
@@ -52,6 +55,21 @@ export default function Penguin(props) {
   
   useEffect(() => {
 
+    var hasballoon = false;
+    if (props.showBalloons ) {
+      var balloon = ""
+      if (penguinObj.strategyShort.endsWith("stability")) {
+        balloon = balloon_stable;
+        hasballoon = true;
+      } else if (penguinObj.strategyShort.endsWith("warmth")) {
+        balloon = balloon_warmth;
+        hasballoon = true;
+      } if (penguinObj.strategyShort.endsWith("food")) {
+        balloon = balloon_fish;
+        hasballoon = true;
+      }
+    }    
+
     var image = peng_loving;
     if (penguinObj.activity === 0) {
       if (penguinObj.moveDirection) {
@@ -73,17 +91,24 @@ export default function Penguin(props) {
       style = {width: '48px', height:'48px', backgroundColor:'rgba(255, 195, 0, 0.5)', borderRadius:'25px', boxShadow: '0 0 20px #FFC300'}
     }
 
-    setPenguin({img:image,left:penguinObj.lpos*48,top:penguinObj.hpos*48,alive:penguinObj.alive, style:style});
+    setPenguin({img:image,left:penguinObj.lpos*48,top:penguinObj.hpos*48,alive:penguinObj.alive, style:style, balloon:balloon, hasballoon:hasballoon});
   },[penguinObj,illuminatedId])    
   
   const handleClick = () => {
     onPenguinClick(penguin.id);
- }
+  }
 
   if (penguin.alive) {
-    return <div className="Penguin" style={{left: penguin.left + 'px', top: penguin.top + 'px', transition:'1s'}} >
-      <img src={penguin.img} style={penguin.style} onClick={handleClick} alt =""/>
-    </div>
+    return ( 
+      <>
+        {penguin.hasballoon && (<div className="Penguin" style={{left: (penguin.left + 24) + 'px', top: (penguin.top - 36) + 'px', opacity:'0.8', transition:'1s'}} >
+          <img src={penguin.balloon} style={{width: '36px', height: '36px' }} alt =""/>
+        </div>)}
+        <div className="Penguin" style={{left: penguin.left + 'px', top: penguin.top + 'px', transition:'1s'}} >
+          <img src={penguin.img} style={penguin.style} onClick={handleClick} alt =""/>
+        </div>
+      </>
+    )
   } 
 
 }

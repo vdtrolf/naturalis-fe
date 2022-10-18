@@ -3,7 +3,7 @@ import empty from "./images/empty.png";
 import fish from "./images/fish-t.png";
 import swim from "./images/fish.png";
 import cross from "./images/cross.png";
-import wreath from "./images/wreath.gif";
+import wreath from "./images/wreath.png";
 import ice from "./images/ice.png";
 import kept from "./images/fish_kept.gif";
 
