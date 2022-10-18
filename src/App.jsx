@@ -30,23 +30,28 @@ export default function App() {
   const [pulser,setPulser] = useState(false);
   const [showBalloons,setShowBalloons] = useState(false);
   const [island,setIsland] = useState({});
-  const [baseURL,setBaseURL] = useState("https://lub3kygki2.execute-api.us-east-1.amazonaws.com/Prod/");
+  const [baseURL,setBaseURL] = useState({name:"aws",url:"https://lub3kygki2.execute-api.us-east-1.amazonaws.com/Prod/"});
   const [illuminatedId,setIlluminatedId] = useState(0);
   const [islandsList,setIslandsList] = useState([]);
+
+  useEffect(() => {
+    document.title = 'TAP TAP Penguin (' + baseURL.name + ")";
+  },[baseURL]);
+
 
   useEffect(() => {
     var intervalId = 0;
     if (runningState === RUNNING) {
       if(!island.id) {
-        getNewIsland(baseURL)
+        getNewIsland(baseURL.url)
         .then((newIsland ) => setIsland(newIsland));
       }
       intervalId = setInterval( () => {
-        refreshIsland(baseURL, island.id)
+        refreshIsland(baseURL.url, island.id)
         .then((updatedIsland) => setIsland(updatedIsland));
 
         // if (sidebar) {
-          refreshIslandsList(baseURL)
+          refreshIslandsList(baseURL.url)
           .then((updatedIslandsList) => setIslandsList(updatedIslandsList));
         // }
 
@@ -63,7 +68,7 @@ export default function App() {
   },[runningState,island,baseURL]);
 
   useEffect(() => {
-    refreshIslandsList(baseURL)
+    refreshIslandsList(baseURL.url)
     .then((updatedIslandsList) => setIslandsList(updatedIslandsList));
   },[baseURL]);
 
@@ -72,7 +77,7 @@ export default function App() {
     if (pulser) {
       pulserIntervalId = setInterval( () => {
         console.log("in pulser interval " + pulserIntervalId );
-        sendState(baseURL);
+        sendState(baseURL.url);
       },2000)
       
     } else {
@@ -150,7 +155,7 @@ export default function App() {
       // console.log("FOUND PENGUIN " + apenguin.name + " " + apenguin.key + " AT " + x + "/" + y);
       setIlluminatedId(apenguin.key);
     } else {
-      setTile(baseURL,island.id,x,y)
+      setTile(baseURL.url,island.id,x,y)
       .then((updatedIsland) => setIsland(updatedIsland));
     }
   } 
@@ -174,14 +179,14 @@ export default function App() {
     setSidebar(false);
     setAdminbar(false);
     setRunningState(RUNNING);
-    refreshIsland(baseURL, id)
+    refreshIsland(baseURL.url, id)
     .then((updatedIsland) => setIsland(updatedIsland));
   }
 
   const handleIslandDelete = (idList) => {
     idList.forEach(islandId => {
       console.log("doing delete " + islandId)
-      refreshIslandsList(baseURL,islandId)
+      refreshIslandsList(baseURL.url,islandId)
       .then((updatedIslandsList) => setIslandsList(updatedIslandsList));
 
       if (islandId === island.id) {
@@ -197,6 +202,7 @@ export default function App() {
     console.log("URL SELECTED " + url)
     setBaseURL(url);
     setIsland({});
+    setRunningState(NOT_STARTED);
     setSidebar(false);
     setAdminbar(false);
   }
@@ -217,7 +223,7 @@ export default function App() {
     <div className="App">
       <Sidebar admin={admin} baseURL={baseURL} onCloseButton={handleCloseButton} onIslandSelect={handleIslandSelect} onIslandDelete={handleIslandDelete} islandId={island.id} islandsList={islandsList} sidebar={sidebar}/>
       <Adminbar showBalloons={showBalloons} admin={admin} baseURL={baseURL} onCloseButton={handleCloseButton} onLogoutButton={handleLogoutButton} onSetBalloons={handleSetBalloons} adminbar={adminbar} urls={urls} onURLSelect={handleURLSelect} onUserInput={handlUserInput}/>
-      <Navbar runningState={runningState} island={island} admin={admin} pulser={pulser} onStartButton={handleStartButton} onStopButton={handleStopButton} onPlusButton={handlePlusButton} onCloneButton={handleCloneButton} onStepsButton={handleStepsButton} onAdminButton={handleAdminButton} />
+      <Navbar runningState={runningState} island={island} baseURL={baseURL} admin={admin} pulser={pulser} onStartButton={handleStartButton} onStopButton={handleStopButton} onPlusButton={handlePlusButton} onCloneButton={handleCloneButton} onStepsButton={handleStepsButton} onAdminButton={handleAdminButton} />
       <div className="WorkArea">
         <IslandArea showBalloons={showBalloons} runningState={runningState} island={island} onTileClick={handleTileClick} onPenguinClick={handlePenguinClick} illuminatedId={illuminatedId}/>
         <Footer penguins={island.penguins} onPenguinEnter={handlePenguinEnter} onPenguinLeave={handlePenguinLeave} illuminatedId={illuminatedId}/>

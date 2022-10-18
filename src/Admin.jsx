@@ -4,7 +4,7 @@ export default function Admin(props) {
 
   const {baseURL, urls, onURLSelect, showBalloons, onSetBalloons, onLogoutButton, onCloseButton} = props;
 
-  const [urlName,setUrlName] = useState((urls.find(anUrl => anUrl.url === baseURL)).name);
+  const [urlName,setUrlName] = useState((urls.find(anUrl => anUrl.url === baseURL.url)).name);
   const [checkBalloons, setCheckBalloons] = useState(showBalloons);
 
   const handleChange = (event) => {
@@ -17,8 +17,8 @@ export default function Admin(props) {
     const choosedUrl = urls.find(url => url.name ===urlName);
     // alert(`The name you submit is : ${choosedUrl.url} and balloons: ${checkBalloons}`)
     
-    if (choosedUrl.url !== baseURL) {
-      onURLSelect(choosedUrl.url);
+    if (choosedUrl.url !== baseURL.url) {
+      onURLSelect(choosedUrl);
     }
     onSetBalloons(checkBalloons);
     onCloseButton();

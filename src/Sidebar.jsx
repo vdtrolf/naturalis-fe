@@ -3,7 +3,7 @@ import Button from "./Button.jsx";
 
 export default function Sidebar(props) {
 
-  const {admin, sidebar, onCloseButton, onIslandSelect, baseURL, onIslandDelete, islandsList } = props;
+  const {admin, sidebar, onCloseButton, onIslandSelect, onIslandDelete, islandsList } = props;
     
   const [checkedState, setCheckedState] = useState(new Array(islandsList.length).fill(false));
   const [selected,setSelected] = useState(false);
@@ -39,7 +39,7 @@ export default function Sidebar(props) {
 
   useEffect(() =>{
     setCheckedState(new Array(islandsList.length).fill(false))
-  },[baseURL,islandsList.length])
+  },[islandsList.length])
 
   if (islandsList) {
 
