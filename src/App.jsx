@@ -30,7 +30,7 @@ export default function App() {
   const [pulser,setPulser] = useState(false);
   const [showBalloons,setShowBalloons] = useState(false);
   const [island,setIsland] = useState({});
-  const [baseURL,setBaseURL] = useState({name:"aws",url:"https://lub3kygki2.execute-api.us-east-1.amazonaws.com/Prod/"});
+  const [baseURL,setBaseURL] = useState({name:"local", url:"http://localhost:3001/"});
   const [illuminatedId,setIlluminatedId] = useState(0);
   const [islandsList,setIslandsList] = useState([]);
 
