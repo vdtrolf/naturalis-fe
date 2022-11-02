@@ -30,8 +30,9 @@ export default function App() {
   const [pulser,setPulser] = useState(false);
   const [showBalloons,setShowBalloons] = useState(false);
   const [island,setIsland] = useState({});
-  const [baseURL,setBaseURL] = useState({name:"aws",url:"https://lub3kygki2.execute-api.us-east-1.amazonaws.com/Prod/"});
+  const [baseURL,setBaseURL] = useState({name:"local", url:"http://localhost:3001/"});
   const [illuminatedId,setIlluminatedId] = useState(0);
+  const [followId, setFollowId] = useState(0);
   const [islandsList,setIslandsList] = useState([]);
 
   useEffect(() => {
@@ -47,8 +48,10 @@ export default function App() {
         .then((newIsland ) => setIsland(newIsland));
       }
       intervalId = setInterval( () => {
-        refreshIsland(baseURL.url, island.id)
+        refreshIsland(baseURL.url, island.id, followId)
         .then((updatedIsland) => setIsland(updatedIsland));
+
+        setFollowId(0);
 
         // if (sidebar) {
           refreshIslandsList(baseURL.url)
@@ -65,7 +68,7 @@ export default function App() {
       clearInterval(intervalId);
     }
 
-  },[runningState,island,baseURL]);
+  },[runningState,island,baseURL,followId]);
 
   useEffect(() => {
     refreshIslandsList(baseURL.url)
@@ -154,6 +157,7 @@ export default function App() {
     if (apenguin && apenguin.alive) {
       // console.log("FOUND PENGUIN " + apenguin.name + " " + apenguin.key + " AT " + x + "/" + y);
       setIlluminatedId(apenguin.key);
+      setFollowId(apenguin.key);
     } else {
       setTile(baseURL.url,island.id,x,y)
       .then((updatedIsland) => setIsland(updatedIsland));
@@ -162,6 +166,7 @@ export default function App() {
 
   const handlePenguinClick = (id) => {
     setIlluminatedId(id);
+    setFollowId(id);
     console.log("PENGUIN CLICKED :  " + id);
   } 
 
@@ -242,11 +247,15 @@ const getNewIsland = async (baseURL) => {
   return extractIslandData(islandData);
 }
 
-const refreshIsland = async (baseURL,islandId) => {
-  const islandData = await convert(baseURL + "islandmoves?islandId=" + islandId );
+const refreshIsland = async (baseURL,islandId,followId) => {
+  var followString = "";
+  if (followId > 0) {
+    followString =  "&followId=" + followId;
+    
+  } 
+  const islandData = await convert(baseURL + "islandmoves?islandId=" + islandId + followString);
   return extractIslandData(islandData);
 }
-
 
 const refreshIslandsList = async (baseURL,islandToDelete=0)  => {
   if (islandToDelete > 0) {

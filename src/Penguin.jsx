@@ -10,6 +10,8 @@ import peng_loving from "./images/peng-loving.gif";
 import balloon_fish from "./images/balloon-fish.png";
 import balloon_stable from "./images/balloon-stable.png";
 import balloon_warmth from "./images/balloon-warmth.png";
+import balloon_love from "./images/balloon-love.png";
+import balloon_ice from "./images/balloon-ice.png";
 
 import peng_f_1_fishing from "./images/peng-f-1-fishing.png";
 import peng_f_2_fishing from "./images/peng-f-2-fishing.png";
@@ -67,6 +69,12 @@ export default function Penguin(props) {
       } if (penguinObj.strategyShort.endsWith("food")) {
         balloon = balloon_fish;
         hasballoon = true;
+      } if (penguinObj.strategyShort.endsWith("love")) {
+        balloon = balloon_love;
+        hasballoon = true;  
+      } if (penguinObj.strategyShort.endsWith("ice")) {
+        balloon = balloon_ice;
+        hasballoon = true;  
       }
     }    
 
