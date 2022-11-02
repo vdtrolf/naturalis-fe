@@ -9,7 +9,7 @@ export default function Adminbar(props) {
   // console.dir(attribs.urls);
 
   return (
-    <div id="mySidebar" className="adminbar" style={{width:adminbar?'200px':'0px',height:admin?'400px':'200px',marginRight:adminbar?'200px':'0px',border:adminbar?'4px solid rgb(103, 133, 168)':'0px solid rgb(103, 133, 168)'}}>
+    <div id="mySidebar" className="adminbar" style={{width:adminbar?'200px':'0px',height:admin?'400px':'220px',marginRight:adminbar?'200px':'0px',border:adminbar?'4px solid rgb(103, 133, 168)':'0px solid rgb(103, 133, 168)'}}>
       <div className="adminNavbar">
         <div>&nbsp;</div>
         <div>{admin?"Admin":"Login"}</div>
