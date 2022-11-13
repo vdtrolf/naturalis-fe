@@ -275,14 +275,18 @@ const sendState = async (baseURL) => {
 
 const extractIslandData = (islandData) => {
 
+  console.dir(islandData)
+
   const tiles = [];
   const artifacts = [];
   const penguins = [];
 
   islandData.island.forEach(tile => {
     tiles.push({key: tile.li *10 + tile.col, type: tile.type, num: tile.num, var: tile.var, line: tile.li, col:tile.col})
-    artifacts.push({key: tile.li *10 + tile.col, type:tile.art, line: tile.li, col:tile.col})
+    artifacts.push({key: (10000 + tile.li *10 + tile.col), type: tile.art, age: tile.age, line: tile.li, col:tile.col})
   }); 
+
+  console.dir(artifacts)
 
   islandData.penguins.forEach(penguin => {
     var gender = penguin.gender==="male"?"m":"f";
@@ -294,8 +298,12 @@ const extractIslandData = (islandData) => {
       activity = 2;
     } else if (penguin.loving > 0) {
       activity = 3;
+    } else if (penguin.digTime > 0) {
+      activity = 4;
+    } else if (penguin.fillTime > 0) {
+      activity = 5;
     }
-    penguins.push({key: penguin.id, alive:penguin.alive, name:penguin.name, lpos:penguin.lpos, hpos:penguin.hpos, gender: gender, activity: activity, hungry:penguin.hungry, wealth:penguin.wealth, shape:penguin.fat, age:penguin.age, genderName:penguin.gender, fishDirection:penguin.fishDirection, strategyShort:penguin.strategyShort, moveDirection:penguin.moveDirection, illuminated:false})
+    penguins.push({key: penguin.id, alive:penguin.alive, name:penguin.name, lpos:penguin.lpos, hpos:penguin.hpos, hasIce:penguin.hasIce, gender: gender, activity: activity, hungry:penguin.hungry, wealth:penguin.wealth, shape:penguin.fat, age:penguin.age, genderName:penguin.gender, fishDirection:penguin.fishDirection, digDirection:penguin.digDirection, fillDirection:penguin.fillDirection, strategyShort:penguin.strategyShort, moveDirection:penguin.moveDirection, illuminated:false})
   }); 
 
   return {id: islandData.islandId,

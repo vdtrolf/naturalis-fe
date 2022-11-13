@@ -34,7 +34,7 @@ export default function IslandArea(props) {
             {island.tiles && island.tiles.map(tile =><Tile key={tile.key} tileType={tile.type} tileNum={tile.num} tileVar={tile.var} tileLine={tile.line} tileCol={tile.col} onTileClick={onTileClick} />)} 
           </div>
           <div className="GridArea" style={{zIndex:'30', pointerEvents:'none'}}>
-            {island.artifacts && island.artifacts.map(artifact =><Artifact key={artifact.key} type={artifact.type} />)} 
+            {island.artifacts && island.artifacts.map(artifact =><Artifact key={artifact.key} type={artifact.type} age={artifact.age} />)} 
           </div>
           <div className="FreeArea" style={{zIndex:'40', pointerEvents:'none'}} >
             {island.penguins && island.penguins.map(penguin =><Penguin key={penguin.key} showBalloons={showBalloons} penguinObj={penguin} onPenguinClick={onPenguinClick} illuminatedId={illuminatedId}/>)} 

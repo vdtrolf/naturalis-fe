@@ -11,7 +11,8 @@ import hunger_2 from "./images/hunger-2.png";
 import hunger_3 from "./images/hunger-3.png";
 import hunger_4 from "./images/hunger-4.png";
 import hunger_5 from "./images/hunger-5.png";
-
+import ice from "./images/ice-s.png"
+import empty from "./images/empty.png"
 
 export default function Footer(props) {
 
@@ -34,6 +35,7 @@ export default function Footer(props) {
         return <>
           <div key={penguin.key} className="TwoBars"><img src={hungerImg} width="50px" height="10px" alt="" /><img src={healthImg} width="50px" height="10px" alt=""/></div>
           <div key={penguin.key + 1000000} className={penguin.key===illuminatedId?"FooterTextIlluminated":"FooterText"} >
+            <img src={penguin.hasIce?ice:empty} with="14px" height="14px" alt="" />
             <div onMouseEnter={() => handleMouseEnter(penguin.key)} onMouseLeave={onPenguinLeave}>{penguin.name}</div>
             <div>({penguin.genderName} / {Math.floor(penguin.age)}y / {shapes[penguin.shape]})</div>
             <div>{penguin.activity > 0? activities[penguin.activity]:penguin.strategyShort}</div>

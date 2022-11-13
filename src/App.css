@@ -420,7 +420,7 @@ label {
   vertical-align: bottom;
   color: #dfeed0;
   display: grid;
-  grid-template-columns: 100px 180px 220px;
+  grid-template-columns: 20px 100px 180px 200px;
   grid-template-rows: auto;
 }
 
@@ -438,7 +438,7 @@ label {
   vertical-align: bottom;
   color: #ddba73;
   display: grid;
-  grid-template-columns: 100px 180px 220px;
+  grid-template-columns: 20px 100px 180px 200px;
   grid-template-rows: auto;
 }
 
