@@ -11,7 +11,10 @@ import {useState,useEffect} from "react";
 
 // const urls = [{name:"aws",url:"https://lub3kygki2.execute-api.us-east-1.amazonaws.com/Prod/"},
 //               {name:"digital ocean", url:"https://lub3kygki2.execute-api.us-east-1.amazonaws.com/Prod/"},
-//               {name:"local", url:"http://localhost:3001/"}]
+//               {name:"local", url:"http://localhost:3001/"}
+
+// test 2
+
 
 const NOT_STARTED = 0;
 const RUNNING = 1;
