@@ -78,7 +78,7 @@ import peng_m_4_movice from "./images/peng-m-move-4-ice.gif";
 export default function Penguin(props) {
 
   const [penguin,setPenguin] = useState({});  
-  const {penguinObj, onPenguinClick, illuminatedId } = props;
+  const {penguinObj, illuminatedId } = props;
   const fishing_f = [peng_f_4_fishing,peng_f_1_fishing,peng_f_2_fishing,peng_f_3_fishing,peng_f_4_fishing]
   const fishing_m = [peng_m_4_fishing,peng_m_1_fishing,peng_m_2_fishing,peng_m_3_fishing,peng_m_4_fishing]
   const fishing_y = [peng_y_4_fishing,peng_y_1_fishing,peng_y_2_fishing,peng_y_3_fishing,peng_y_4_fishing]
@@ -155,10 +155,6 @@ export default function Penguin(props) {
     setPenguin({img:image,left:penguinObj.lpos*48,top:penguinObj.hpos*48,alive:penguinObj.alive, style:style, balloon:balloon, hasballoon:hasballoon});
   },[penguinObj,illuminatedId])    
   
-  const handleClick = () => {
-    onPenguinClick(penguin.id);
-  }
-
   if (penguin.alive) {
     return ( 
       <>
@@ -166,7 +162,7 @@ export default function Penguin(props) {
           <img src={penguin.balloon} style={{width: '36px', height: '36px' }} alt =""/>
         </div>)}
         <div className="Penguin" style={{left: penguin.left + 'px', top: penguin.top + 'px', transition:'1s'}} >
-          <img src={penguin.img} style={penguin.style} onClick={handleClick} alt =""/>
+          <img src={penguin.img} style={penguin.style} alt= "" /> 
         </div>
       </>
     )

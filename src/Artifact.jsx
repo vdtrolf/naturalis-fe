@@ -24,8 +24,6 @@ export default function Artifact(props) {
 
   useEffect(() => {
 
-    console.log("#### " + type + " " + age)
-
     if (type === 5 && age > 0 ) {
       setArtifact({type:type, img: digImg[age]});
     } else {

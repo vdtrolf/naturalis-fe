@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import Navbar from "./Navbar.jsx";
 import Sidebar from "./Sidebar.jsx";
+import Details from "./Details.jsx";
 import Adminbar from "./Adminbar.jsx";
 import IslandArea from "./IslandArea.jsx";
 import Footer from "./Footer.jsx";
@@ -32,6 +33,7 @@ export default function App() {
   const [island,setIsland] = useState({});
   const [baseURL,setBaseURL] = useState({name:"local", url:"http://localhost:3001/"});
   const [illuminatedId,setIlluminatedId] = useState(0);
+  const [selectedId,setSelectedId] = useState(0);
   const [followId, setFollowId] = useState(0);
   const [islandsList,setIslandsList] = useState([]);
 
@@ -150,24 +152,31 @@ export default function App() {
     console.log("LOGOUT CLOSE PRESSED");
   } 
 
+  const handleDetailsCloseButton = () => {
+    setSelectedId(0);
+    setIlluminatedId(0);
+    setFollowId(0);
+  }
+
   const handleTileClick = (x,y) => {
     // console.log("TILE CLICKED AT " + x + "/" + y);
 
     const apenguin = island.penguins.find(penguin => penguin.hpos === x && penguin.lpos === y);
     if (apenguin && apenguin.alive) {
-      // console.log("FOUND PENGUIN " + apenguin.name + " " + apenguin.key + " AT " + x + "/" + y);
-      setIlluminatedId(apenguin.key);
-      setFollowId(apenguin.key);
+      if (apenguin.key === selectedId) {
+        setSelectedId(0);
+        setIlluminatedId(0);
+        setFollowId(0);
+      } else {
+        // console.log("FOUND PENGUIN " + apenguin.name + " " + apenguin.key + " AT " + x + "/" + y);
+        setSelectedId(apenguin.key);
+        setIlluminatedId(apenguin.key);
+        setFollowId(apenguin.key);
+      }
     } else {
       setTile(baseURL.url,island.id,x,y)
       .then((updatedIsland) => setIsland(updatedIsland));
     }
-  } 
-
-  const handlePenguinClick = (id) => {
-    setIlluminatedId(id);
-    setFollowId(id);
-    console.log("PENGUIN CLICKED :  " + id);
   } 
 
   const handlePenguinEnter = (id) => {
@@ -230,9 +239,11 @@ export default function App() {
       <Adminbar showBalloons={showBalloons} admin={admin} baseURL={baseURL} onCloseButton={handleCloseButton} onLogoutButton={handleLogoutButton} onSetBalloons={handleSetBalloons} adminbar={adminbar} urls={urls} onURLSelect={handleURLSelect} onUserInput={handlUserInput}/>
       <Navbar runningState={runningState} island={island} baseURL={baseURL} admin={admin} pulser={pulser} onStartButton={handleStartButton} onStopButton={handleStopButton} onPlusButton={handlePlusButton} onCloneButton={handleCloneButton} onStepsButton={handleStepsButton} onAdminButton={handleAdminButton} />
       <div className="WorkArea">
-        <IslandArea showBalloons={showBalloons} runningState={runningState} island={island} onTileClick={handleTileClick} onPenguinClick={handlePenguinClick} illuminatedId={illuminatedId}/>
-        <Footer penguins={island.penguins} onPenguinEnter={handlePenguinEnter} onPenguinLeave={handlePenguinLeave} illuminatedId={illuminatedId}/>
-      </div>
+        <IslandArea showBalloons={showBalloons} runningState={runningState} island={island} onTileClick={handleTileClick} illuminatedId={illuminatedId}/>
+        <div></div>
+        {selectedId === 0 && (<Footer penguins={island.penguins} onPenguinEnter={handlePenguinEnter} onPenguinLeave={handlePenguinLeave} illuminatedId={illuminatedId}/>)}
+        {selectedId > 0 && (<Details penguin={island.penguins.find(penguin => penguin.key === selectedId)} onDetailsCloseButton={handleDetailsCloseButton} /> )}
+        </div>
     </div>
   );
 }
@@ -286,7 +297,7 @@ const extractIslandData = (islandData) => {
     artifacts.push({key: (10000 + tile.li *10 + tile.col), type: tile.art, age: tile.age, line: tile.li, col:tile.col})
   }); 
 
-  console.dir(artifacts)
+  { /* console.dir(artifacts) */ }
 
   islandData.penguins.forEach(penguin => {
     var gender = penguin.gender==="male"?"m":"f";
@@ -303,7 +314,30 @@ const extractIslandData = (islandData) => {
     } else if (penguin.fillTime > 0) {
       activity = 5;
     }
-    penguins.push({key: penguin.id, alive:penguin.alive, name:penguin.name, lpos:penguin.lpos, hpos:penguin.hpos, hasIce:penguin.hasIce, gender: gender, activity: activity, hungry:penguin.hungry, wealth:penguin.wealth, shape:penguin.fat, age:penguin.age, genderName:penguin.gender, fishDirection:penguin.fishDirection, digDirection:penguin.digDirection, fillDirection:penguin.fillDirection, strategyShort:penguin.strategyShort, moveDirection:penguin.moveDirection, illuminated:false})
+    penguins.push({key: penguin.id, 
+                   alive:penguin.alive, 
+                   name:penguin.name, 
+                   lpos:penguin.lpos, 
+                   hpos:penguin.hpos, 
+                   hasIce:penguin.hasIce, 
+                   gender: gender, 
+                   activity: activity, 
+                   hungry:penguin.hungry, 
+                   wealth:penguin.wealth, 
+                   shape:penguin.fat, 
+                   age:penguin.age, 
+                   genderName:penguin.gender, 
+                   fishDirection:penguin.fishDirection, 
+                   digDirection:penguin.digDirection, 
+                   fillDirection:penguin.fillDirection, 
+                   strategyShort:penguin.strategyShort, 
+                   moveDirection:penguin.moveDirection, 
+                   knownWorld: penguin.knownWorld,
+                   vision: penguin.vison,
+                   targetDirections: penguin.targetDirections,
+                   targetLPos: penguin.targetLPos,
+                   targetHPos: penguin.targetHPos,
+                   illuminated:false})
   }); 
 
   return {id: islandData.islandId,
